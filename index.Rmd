@@ -471,7 +471,7 @@ colnames(topsis_final) <- c("state", "topsis_score", "topsis_rank", "topsis_grou
 topsis_final[1:10,]
 ```
 
-Wyniki porządkowania 50 stanow pod wzgledem infrastruktury transportowej metodami Hellwiga i TOPSIS są nastepujace:
+The results of creating a ranking for 50 states of America in terms of transportation infrastructure using the Hellwig and TOPSIS methods are as follows:
 
 ```{r echo=FALSE}
 ordering_final<- merge(hellwig_final,topsis_final, by="state")
