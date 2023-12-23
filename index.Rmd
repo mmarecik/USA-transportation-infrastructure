@@ -1,7 +1,6 @@
 ---
-title: "Analiza statystyczna infrastruktury transportowej w USA"
+title: "Statistical analysis of USA transportation infrastructure"
 author: "Magdalena Marecik"
-date: "31.10.2021"
 output: html_document
 ---
 
@@ -12,56 +11,69 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-## Wprowadzenie i cel projektu
+## Introduction
 
-Infrastruktura transportowa od lat pełni kluczowa role w rozwoju amerykanskiej gospodarki. Stanowiac jej rusztowanie, decyduje, w ktorych czesciach kraju nastapi wzrost gospodarczy, a ktore rejony poniosa straty. Obecnie stan infrastruktury transportowej w USA jest oceniany jako sredni. W marcu 2021 roku organziacja American Society of Civil Engineers w raporcie Infrastructure Report Card przyznala amerykanskiemu systemowi transportowemu ocene C-minus [(link do raportu)](https://infrastructurereportcard.org/). Ogolnie rzecz biorac, nastapila zatem niewielka poprawa w stosunku do roku 2017, kiedy transport w USA byl oceniany w tym samym raporcie na D-plus. Jednoczesnie autorzy raportu podkreslaja, ze wiele obszarow takich jak transport publiczny, lotniska czy stan drog, autostrad i mostow wykazuje silne pogorszenie i "znaczne ryzyko awarii". Ponadto autorzy szacuja, ze prawie polowa mieszkancow USA nie ma dostepu do transportu publicznego. Wedlug innych badan, opoznienia spowodowane przez zatory komunikacyjne – ktore czesto są spowodowane nieodpowiednią infrastrukturą – powodują straty w gospodarce w wysokości ponad 120 miliardów dolarów każdego roku. Wsrod amerykanskich rzadzacych wciaz tocza sie debaty na temat tego, jakie projekty dotyczace infrastruktury transportowej powinny być uchwalone, aby poprawic jej stan i jak je sfinansowac.
+Transport infrastructure has played a crucial role in the development of the American economy for years. It determines in which parts of the country economic growth will occur and which regions will incur losses. Currently, the state of the transport infrastructure in the USA is assessed as average. In March 2021, the American Society of Civil Engineers, in its Infrastructure Report Card, awarded the American transportation system a grade of C-minus [(link to the report)](https://infrastructurereportcard.org/). Overall, there has been a slight improvement compared to 2017 when transportation in the USA was rated a D-plus in the same report. At the same time, the report's authors emphasize that many areas such as public transport, airports, and the condition of roads, highways, and bridges show significant deterioration and "considerable risk of failure." Furthermore, the authors estimate that almost half of the US population does not have access to public transportation. According to other studies, delays caused by traffic congestion — often due to inadequate infrastructure — result in economic losses exceeding $120 billion annually.
 
-Z drugiej strony w pewnej czesci stanow Ameryki infrastruktora transportowa jest utrzymana na wysokim poziomie. W rankingu opublikowanym przez U.S. News - 2021 Best States rankings [(link do rankingu)](https://www.usnews.com/news/best-states/rankings/infrastructure/transportation) mozemy zobaczyc, ktore stany zdobyly najwyzszy wynik biorac pod uwage stan znajdujacych sie na ich terytorium drog i mostow, a takze stopien zakorkowania oraz sredni czas, jaki mieszkancy musza przeznaczyc na dojazd do pracy. Ranking ten stanowil inspiracje do przeprowadzenia analizy statystycznej kondycji transportu w poszczegolnych stanach Ameryki. Badanie swoim zakresem obejmie stworzenie wlasnego rankingu stanow pod wzgledem infrastruktury transportowej, a takze klasyfikacje na grupy o charakterystycznych cechach. Celem analizy jest proba znalezienia odpowiedzi na ponizsze pytania:
+Among American policymakers, debates are still ongoing about transportation infrastructure projects that should be adopted to improve its condition and how to finance them.
 
-- Ktore stany maja najlepsza, a ktore najgorsza infrastrukture transportowa, biorac pod uwage wszystkie badane czynniki?
+On the other hand, in some parts of America, the transportation infrastructure is maintained at a high level. In the ranking published by U.S. News - 2021 Best States rankings [(link to the ranking)](https://www.usnews.com/news/best-states/rankings/infrastructure/transportation), we can see which states have achieved the highest scores, considering the condition of roads and bridges within their territories, as well as the degree of congestion and the average time residents spend commuting to work. This ranking served as inspiration for conducting a statistical analysis of the transportation condition in individual states of America. The study will include creating a ranking of states in terms of transportation infrastructure and classifying them into groups possesing characteristic features. The aim of the analysis is an attempt to find answers to the following questions:
 
-- Ktore stany charakterysuja sie podobna kondycja infrastruktury finansowej, a ktore znaczaco sie od siebie roznia?
+- Which states have the best and worst transportation infrastructure, considering all the factors examined?
 
-- Ile grup o znacznie odmiennych warunkach transportowych mozemy wyroznic sposrod 50 stanow Ameryki?
+- Which states are characterized by similar financial infrastructure conditions, and which ones differ significantly?
+
+- How many groups with significantly different transportation conditions can we distinguish among the 50 states of America?
 
 
 
 
 
-## Opis i wstepna analiza danych
+## Explanatory Data Analysis
 
-Zbior danych wykorzystany w projekcie zostal stworzony na podstawie danych zebranych na amerykanskich stronach internetowych. Strony te udostepniaja krajowe statystyki, gromadzac je z roznych zrodel, np. United States Department of Transportation. Dane zawieraja wybrane wielkosci dotyczace kondycji infrastruktury transportowej w poszczegolnych stanach Ameryki:
+The dataset used in the project was created based on data collected from American websites. These websites provide national statistics by gathering information from various sources, such as the United States Department of Transportation. The data includes selected metrics related to the condition of transportation infrastructure in individual states of America:
 
--	Sredni dzienny czas, jaki zajmuje osobie powyzej 16 roku zycia dojazd do pracy, 2014-2018 (minuty) [(link)](https://www.indexmundi.com/facts/united-states/quick-facts/all-states/average-commute-time#map)
+-	Average daily commute time for individuals aged 16 and above, 2014-2018 (minutes)  [(link)](https://www.indexmundi.com/facts/united-states/quick-facts/all-states/average-commute-time#map)
 
--	Liczba godzin spędzana rocznie przez przecitnego kierowce w korkach, 2017 (godziny) [(link)](https://reason.org/policy-study/24th-annual-highway-report/urbanized-area-congestion/)
+-	Number of hours spent annually by the average driver in traffic congestion, 2017 (hours) [(link)](https://reason.org/policy-study/24th-annual-highway-report/urbanized-area-congestion/)
 
--	liczba zgonów w wypadkach na 100 milionów mil przejechanych przez pojazdy silnikowe, 2019 [(link)](https://www.iihs.org/topics/fatality-statistics/detail/state-by-state)
+-	Number of deaths in motor vehicle crashes per 100 million vehicle miles traveled, 2019 [(link)](https://www.iihs.org/topics/fatality-statistics/detail/state-by-state)
 
--	Procent drog bedacych w dobrej kondycji, 2019 (%) [(link)](https://www.bts.gov/road-condition)
+-	Percentage of roads in good condition, 2019 (%) [(link)](https://www.bts.gov/road-condition)
 
--	Procent mostow bedacych w zlej kondycji, 2019 (%) [(link)](https://www.bts.gov/bridge-condition)
+-	Percentage of bridges in poor condition, 2019 (%) [(link)](https://www.bts.gov/bridge-condition)
 
 ```{r include=FALSE}
 library(knitr)
 library(readxl)
+# install.packages("psych")
+library(psych)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(GGally)
+library(factoextra)
+library(purrr)
+library(ggdendro)
+library(dendextend)
+library(clusterSim)
+library(ggfortify)
+library(scatterplot3d)
+
 data_oryg <- read_excel("data.xlsx")
 data <- data_oryg
 ```
 
-Aby zminimalizowac ryzyko bledow i pozniej moc lepiej zinterpretowac otrzymane wyniki, przed rozpoczeciem badania nalezy dokonac wstepnej analizy zgromadzonych danych.
+In order to minimize the risk of making errors and be able to interpret the obtained results better, before the right research, it is advised to perform an explanatory data analysis.
 
 
 
 
 
-### Podstawowe statystyki opisowe zmiennych
+### Descriptive statistics
 
 
-```{r message=FALSE, warning=FALSE, echo=FALSE results='asis'}
-
-# install.packages("psych")
-library(psych)
+```{r message=FALSE, warning=FALSE, echo=FALSE, results='asis'}
 kable(describe(data[,-1]))
 ```
 
@@ -69,14 +81,11 @@ kable(describe(data[,-1]))
 
 
 
-#### Sredni czas dojazdu do pracy
+#### Average daily commute time
 
-
-Obliczajac srednia z przecietnego czasu, jaki zajmuje mieszkancom poszczegolnych stanow dojazd do pracy, okazuje sie ze Amerykanie spedzaja w drodze do pracy przecietnie niecale 25 minut dziennie, przy odchyleniu standardowym ok. 4 minut. Ujemna kurtoza wskazuje, ze ilosc wartosci skrajnych jest mniejsza niz w przypadku rozkladu normalnego, co mozna zaobserwowac na ponizszym histogramie. Mozna podejrzewac, ze wsrod wielkosci tej zmiennej nie bedzie obserwacji odstajacych. Okazuje sie, ze najwiecej czasu na dojazd do pracy - srednio 33,3 min, poswiecaja mieszkancy Nowego Jorku, natomiast najmniej obywatele Poludniowej Dakoty - okolo 17 minut.
+When calculating the mean of the average commuting time for residents of individual states, it turns out that Americans spend on the average less than 25 minutes per day commuting to work, with a standard deviation of about 4 minutes. The negative kurtosis indicates that the number of extreme values is smaller than in the case of a normal distribution, as observed in the histogram below. One might suspect that there are no outliers among the values of this variable. It turns out that the residents of New York spend the most time commuting to work, specifically 33.3 minutes on average, while the citizens of South Dakota spend the least average amount of time - about 17 minutes.
 
 ```{r message=FALSE, warning=FALSE, echo=FALSE, fig.align = 'center'}
-library(ggplot2)
-
 ggplot(data, aes(x=travel_time_to_work)) + 
   geom_histogram(bins=7, fill="#70adc2", color="#cccccc", alpha=0.8, boundary=10) +
     scale_x_continuous(breaks = seq(min(data[,2])-3, max(data[,2])+3, round((max(data[,2]) - min(data[,2]))/7, 0))) +
@@ -87,8 +96,6 @@ ggplot(data, aes(x=travel_time_to_work)) +
 ```
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-library(dplyr)
-
 max_travel_time_to_work <- data %>% 
   slice(which.max(travel_time_to_work))
     max_travel_time_to_work
@@ -102,24 +109,25 @@ min_travel_time_to_work <- data %>%
 
 
 
-#### Srednia liczba godzin spedzana rocznie w korkach
+#### Number of hours spent annually in traffic congestion
 
 
-Amerykanie spedzaja przecietnie rocznie w korkach niecale 23 godziny, przy dosc duzym odchyleniu standardowym - ok. 16 godzin. Mediana mniejsza od sredniej wskazuje na prawostronna skosnosc rozkladu zmiennej. Najwieksza wartosc zmiennej - ponad 70 godzin rocznie spedzanych w korkach, przypada na przecietnego mieszkanca Nowego Jorku i znaczaco odstaje od sredniej wartosci tej cechy. Na ponizszym wykresie widzimy ile godzin w korkach spedzaja rocznie obywatele poszczegolnych stanow oraz ile przecietnie zajmuje im dojazd do pracy (minuty) - mozna dostrzec dodatnia zaleznosc pomiedzy obiema wielkosciami.
+
+Americans spend on average less than 23 hours annually in traffic, with a relatively large standard deviation of approximately 16 hours. The median being smaller than the mean indicates a right-skewed distribution of the variable. The maximum value of the variable, over 70 hours annually spent in traffic, is attributed to the average resident of New York and significantly deviates from the mean of this characteristic. In the chart below, we can see how many hours citizens of individual states spend in traffic annually and how much time is taken on average for their commute to work (in minutes) - a positive correlation between the two variables is visible.
 
 
 ```{r echo=FALSE, fig.align = 'center', fig.width = 15, fig.height = 8}
 ggplot(data)  + 
     geom_bar(aes(x=reorder(state, hours_in_congestion), y=hours_in_congestion, color = "Annual time spent in traffic jam (in hours)"),stat="identity", fill="#abcced", alpha=0.7)+
       geom_line(aes(x=reorder(state, hours_in_congestion), y=travel_time_to_work, group = 1, color ="Mean travel time to work (in minutes)"),
-                                stat="identity", size=1) + 
+                                stat="identity", linewidth=1) + 
         labs(title= "Mean travel time to work (in minutes) vs annual time spent in traffic jam (in hours) by one commuter",
           x="State", y="Annual time spent in congestion (in hours)") +
               theme_minimal() + theme(axis.text.x = element_text(angle=90, vjust=0.2, hjust=1)) +
                 scale_color_manual(name = "Legend", values = c("Mean travel time to work (in minutes)"="#737373", "Annual time spent in traffic jam (in hours)" = "#6b82c7"))
 ```
 
-```{r include=FALSE}
+```{r echo=FALSE}
   max_time_in_congestion <- data %>% 
     slice(which.max(hours_in_congestion))
   max_time_in_congestion
@@ -129,10 +137,10 @@ ggplot(data)  +
 
 
 
-#### Liczba zgonów w wypadkach na 100 milionów przejechanych mil
+#### Number of deaths in motor vehicle crashes
 
 
-W USA wspolczynnik zgonow przypadajacych na 100 milionów przejechanych mil wynosi 1,14. Ujemna kurtoza wskazuje, ze intensywnosc wystepowania obserwacji skrajnych w rozkladzie tej cechy jest mniejsza niz w rozkladzie normalnym i dane skupione sa wokol sredniej. Spodziewamy sie, ze wsrod danych nie bedzie obserwacji odstajacych. Najmniejszy wspolczynnik zgonow w wypadkach drogowych wystepuje w Massachusetts i wynosi 0,54. Najwiecej osob w wypadkach ginie w Poludniowej Kalifornii. Wspolczynnik smierci w wypadkach drogowych wynosi tam 1,83.
+In the USA, the death rate per 100 million miles driven is 1.14. The negative kurtosis indicates that the intensity of extreme observations in the distribution of this feature is lower than in a normal distribution, and the data are concentrated around the mean. We expect that there will be no outliers among the data. The smallest death rate in road accidents occurs in Massachusetts and is 0.54. The highest number of fatalities in accidents is in Southern California, where the death rate in road accidents is 1.83.
 
 
 ```{r echo=FALSE, fig.align='center'}
@@ -149,21 +157,20 @@ W USA wspolczynnik zgonow przypadajacych na 100 milionów przejechanych mil wyno
 
 
 
-#### Kondycja drog i mostow
+#### Roads and bridges condition
 
 
-W Ameryce okolo 81% drog pozostaje w dobrym stanie, przy odchyleniu standardowym 11 punktow procentowych. Najlepsze warunki pod wzgledem kondycji drog charakteryzuja Idaho - stan na polnocnym zachodzie Stanow Zjednoczonych, gdzie ponad 96% drog jest w dobrym stanie. Najgorszy stan drog sposrod wszystkich stanow jest natomiast w Rhode Island - polnocno-wschodnia czesc USA.
+In America, approximately 81% of roads are in good condition, with a standard deviation of 11 percentage points. The best road conditions are found in Idaho, a state in the northwest of the United States, where over 96% of roads are in good condition. On the other hand, the worst road conditions among all states are in Rhode Island, the northeastern part of the USA.
 
-Przecietnie 6% mostow w stanach Ameryki pozostaje w zlym stanie. Wartosc ta odchyla sie srednio o 4 punkty procentowe. Podobnie jak w przypadku drog, najwiecej mostow w zlym stanie znajduje sie w Rhode Island - az 24%. Najlepsza kondycja mostow chrakteryzuje Utah - stan na srodkowym zachodzie Stanow Zjednoczonych. Wysoka wartosc kurtozy rozkladu tej zmiennej wskazuje na rozklad leptokurtyczny oraz potencjalne wystepowanie obserwacji skrajnych.
-
-
+On average, 6% of bridges in the United States are in poor condition, with an average deviation of 4 percentage points. Similar to roads, the highest percentage of bridges in poor condition is found in Rhode Island, reaching 24%. Utah, a state in the Midwest of the United States, has the best bridge conditions. The high kurtosis value of the distribution of this variable indicates a leptokurtic distribution and the potential occurrence of extreme observations.
 
 
 
-#### Obserwacje odstajace
+
+
+#### Outliers
 
 ```{r echo=FALSE, fig.align='center'}
-library(gridExtra)
 p1 <- ggplot(data, aes(y=travel_time_to_work)) + 
   geom_boxplot(fill="#9eccfa", alpha=0.8) + 
   labs(y = "Mean travel time to work (minutes) per one commuter") +
@@ -182,10 +189,9 @@ p3 <- ggplot(data, aes(y=fatalities)) +
 grid.arrange(p1, p2, p3, ncol=3)
 ```
 
+In the next stage, we will analyze our data in terms of outliers. The analysis of box plots for the first three variables confirms our earlier assumptions. Among the average commute time and the fatality rate in road accidents, there are no outlier values. However, extreme values are present in the case of the average number of hours spent in traffic jams. It can be inferred that some states are characterized by a significantly longer time that residents have to spend in traffic jams than others. At the forefront are New Jersey (70.15 hours), New York (62.76 hours), and California (60.91 hours).
 
-W kolejnym etapie przeanalizujemy nasze dane pod katem obserwacji skrajnych. Analiza wykresow pudelkowych dla pierwszych trzech zmiennych potwierdza nasze wczesniejsze przypuszczenia. Wsrod sredniego czasu dojazdu do pracy oraz wspolczynnika smierci w wypadkach drogowych brak wartosci odstajacych. Wystepuja one natiomiast w przypadku sredniej liczby godzin spedzonych w korkach. Mozna wywnisokwoac, ze czesc stanow odznacza sie zdecydowanie wiekszym czasem, jaki mieszkancy musza spedzac w korkach, niz posotale. W czolowce znajduja sie New Jersey (70,15 godzin), Nowy Jork (62,76 godziny) oraz Kalifornia (60,91 godzin).
-
-```{r include=FALSE}
+```{r echo=FALSE}
 top_3_congestion <- data %>%
   top_n(3, hours_in_congestion)
 top_3_congestion
@@ -212,15 +218,15 @@ grid.arrange(p4, p5, ncol=2)
 
 
 
-Wsrod zmiennych dotyczacych kondycji drog i mostow USA rowniez znajduja sie obseracje skrajne. Mozna zauwazyc, ze czesc stanow chrakteryzuje sie znacznie gorszym stanem drog i mostow niz pozostale. Pod wzgledem obu czynnikow wyroznia sie tu Rhode Island, a takze New Jersey, gdzie jedynie 53% drog jest w mozliwym do przyjecia stanie.
+Among the variables related to the condition of roads and bridges in the USA, there are also outlier observations. It can be noticed that some states are characterized by a significantly worse condition of roads and bridges than others. In terms of both factors, Rhode Island stands out, as well as New Jersey, where only 53% of roads are in an acceptable condition.
 
-W badaniu zidentyfikowane obserwacje odstajace nie zostana usuniete, z uwagi na to, ze wplywaja na wieksza zmiennosc danych i daja punkt wyjscia do podzialu obiektow na grupy o odmiennych cechach. 
-
-
+In the study, identified outlier observations will not be removed, as they contribute to greater variability in the data and provide a starting point for dividing objects into groups with different characteristics.
 
 
 
-#### Wspolczynnik zmiennosci
+
+
+#### Coefficient of variation
 
 
 ```{r echo=FALSE}
@@ -230,43 +236,42 @@ for(i in 2:6){
 }
 ```
 
-Poniewaz chcemy podzielic nasze obiekty na grupy o odmiennych cechach, istotnym czynnikiem przy wyborze zmiennych do modelu analizy skupien jest ich wystarczajaca zmiennosc. W przypadku omawianych wielkosci wszystkie posiadaja wspolczynnik zmiennosci wiekszy niz 10%, zatem nie ma przeszkod aby wykorzystac je w badaniu.
+Since we want to divide our objects into groups with different characteristics, a significant factor in selecting variables for the cluster analysis model is their sufficient variability. In the case of the discussed variables, all of them have a coefficient of variation greater than 10%, so there is no obstacle to using them in the study.
 
 
 
 
 
-#### Korelacja
+#### Correlation
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.width = 15, fig.height = 8}
-library(GGally) 
 ggpairs(data[,2:6]) +
   theme(text = element_text(size=20), axis.text = element_text(size=12))
 ```
 
-
-Kiedy zmienne uzywane do analizy skupien sa ze soba zbyt mocno skorelowane, moga przyjmujowac wieksze wagi niz inne zmienne, reprezentujac to samo zjawisko. Moze to falszywie wplynac na ostateczny rezultat, poniewaz rozwiazanie przechyli sie w kierunku pojecia, ktoremu w wyniku zbyt duzej korelacji zmiennych przypisano wieksza wage. Nie chcemy zatem, aby nasze zmienne byly wspolliniowe. Na powyzszym wykresie mozna odczytac, ze wykorzystane w badaniu zmienne nie sa ze soba silnie skorelowane, poniewaz w kazdym przypadku wspolczynnik korelacji jest mniejszy niz 90%.   
-
+When variables used for cluster analysis are too strongly correlated, they may carry more weight than other variables, representing the same phenomenon. This can badly influence the final result because the solution may lean towards the concept to which, due to too much correlation between variables, greater weight has been assigned. Therefore, we do not want our variables to be collinear. On the chart above, it can be observed that the variables used in the study are not strongly correlated with each other, as in each case, the correlation coefficient is less than 90%.
 
 
 
 
 
-## Porzadkowanie liniowe
+
+## Linear ordering
 
 
-W tej czesci badania wystepujace w zbiorze obiekty, czyli poszczegolne stany Ameryki zostana uszeregowane ze wzgledu na wartosci przedstawionych zmiennych - od "najlepszego" do "najgorszego". Aby obiekty mozna bylo uporzadkowac nalezy ustalic pewne kryterium, pozwalajace np. zakwalifikowac obiekt jako lepszy. W tym celu wszystkie zmienne w zbiorze zostaly zamienione na stymulanty.
 
-```{r include=FALSE}
+In this part of the study, the entities present in the dataset, which are individual states of America, will be ranked based on the values of the presented variables - from "best" to "worst." To rank the entities, it is necessary to establish certain criteria, allowing, for example, to classify an entity as better. For this purpose, all variables in the dataset have been transfered to stimulants.
+
+```{r echo=FALSE}
 data_stym <- data
 data_stym[, 2:4] <- (-1)*data_stym[, 2:4]
 data_stym[, 6] <- (-1)*data_stym[, 6]
 ```
 
-W kolejnym kroku dane standaryzujemy, odejmujac od kazej obserowanej wartosci jej srednia i dzielac przez odchylenie standardowe, aby zmienne (podane w roznych jednostkach) byly miedzy soba porownywalne.
+In the next step, we standardize the data by subtracting the mean from each observed value and dividing by the standard deviation so that variables (given in different units) are comparable to each other.
 
-```{r include=FALSE}
+```{r echo=FALSE}
 data_stand <- data_stym
 for (i in 2:6){
   data_stand[, i] <- scale(data_stand[ ,i], center = TRUE, scale = TRUE)
@@ -276,9 +281,9 @@ for (i in 2:6){
 
 
 
-#### Metoda Hellwiga porzadkowania liniowego
+#### Hellwig method of Linear Ordering
 
-Metoda Hellwiga porzadkowania liniowego jest przykladem metody wzorcowej. Oznacza to ranking zostanie stworzony na podstawie odleglosci obiektow od wyznaczonego wzorca, czyli najlepszego mozliwego obiektu. Wyznaczony w badaniu wzorzec przyjmuje nastepujace wartosci zmiennych (po standaryzacji):
+The Hellwig's method of linear ordering is an example of a reference method. This means that the ranking will be created based on the distances of objects from a designated pattern, i.e., the best possible object. The determined reference in the study takes the following values of variables (after standardization):
 
 ```{r echo=FALSE }
 ideal <- c(max(data_stand$travel_time_to_work),
@@ -288,13 +293,13 @@ ideal <- c(max(data_stand$travel_time_to_work),
 ideal
 ```
 
-W kolejnym kroku nalezy wyznaczyc odleglosci obiektow od wzorca:
+The next step is calculation of distance from each entity to the ideal object:
 
 $$
 d_i = \sqrt{\sum{(x_{ij}-d_j^+)^2}}
 $$
 
-```{r include=FALSE}
+```{r echo=FALSE}
 for (i in 1:5){
   data_stand[, i+6] <- (data_stand[, i+1] - ideal[i])^2
 }
@@ -304,31 +309,32 @@ for (i in 1:nrow(data_stand)){
 }
 ```
 
-oraz znalezc odleglosc "mozliwie daleka":
+and finding the "possibly largest" distance:
 
 $$
 d_0 = \bar{d_i} + 2 * s(d_i)
 $$
 
-```{r include=FALSE}
+```{r echo=FALSE}
 odl_moz_daleka <- mean(unlist(data_stand[, 12])) + 2*sd(unlist(data_stand[, 12]))
 ```
 
-Nastepnie wystarczy obliczyc wartosci miary dla kazdego obiektu wedlug ponizszej formuly. Obiekty posortowane wedlug powyzszej miary (od najwiekszego do najmniejszego) stworza ostateczny ranking.
+
+Then final step is to calculate the values of the measure for each object according to the formula below. Objects sorted according to the measure below (from largest to smallest) will create the final ranking.
 
 $$
 s_i = 1 - \frac{d_{i0}}{d_0}
 $$
 
-```{r include=FALSE}
+```{r echo=FALSE}
 for (i in 1:nrow(data_stand)){
   data_stand[i, 13] <- 1 - data_stand[i, 12] / odl_moz_daleka
 }
 ```
 
-Uzyskane wyniki mozna zinterpretowac, grupujac obiekty wedlug sredniej wartosci rankingowej. Stany dzielimy na 4 grupy - o najlepszej, ponadprzecietnej, ponizej przecietnej oraz najnizszej ilosci punktow uzyskanych w rankingu (zmienna rankingowa). Ostateczny rezultat mozna zobaczyc w ponizszej tabeli:
+The obtained results can be interpreted by grouping objects according to the average ranking value. States are divided into 4 groups - with the best, above-average, below-average, and the lowest number of points obtained in the ranking (ranking variable). The final result can be seen in the table below:
 
-```{r echo=FALSE results='asis'}
+```{r echo=FALSE, results='asis'}
 hellwig_final <-data_stand[order(data_stand[ ,13], decreasing=TRUE), -c(2:12)]
 colnames(hellwig_final) <- c("state", "hellwig_score")
 hellwig_final$hellwig_rank <- c(1:51)
@@ -336,7 +342,7 @@ hellwig_final$hellwig_rank <- c(1:51)
 avg_hellwig_score <- mean(hellwig_final$hellwig_score)
 sd_hellwig_score <- sd(hellwig_final$hellwig_score)
 
-# Interpretacja wynikow na podstawie sredniej wartosci wspolczynnika rankingowego
+# Interpretation
 
 for(i in 1:nrow(hellwig_final)){
   if(hellwig_final[i,2] >= avg_hellwig_score + sd_hellwig_score){
@@ -356,7 +362,7 @@ for(i in 1:nrow(hellwig_final)){
 }
 
 colnames(hellwig_final) <- c("state", "hellwig_score", "hellwig_rank", "hellwig_group")
-kable([1:10,])
+kable(hellwig_final[1:10,])
 ```
 
 
@@ -364,17 +370,18 @@ kable([1:10,])
 
 
 
-#### Metoda TOPSIS porzadkowania liniowego
+#### TOPSIS method of Linear Ordering
 
-Metoda TOPSIS jest analogiczna do metody Hellwiga, z t różnica, ze obiekty porownujemy nie tylko do "idealu", ale rowniez antywzorca.
 
-Po zamianie zmeiennych na stymulanty oraz wyznaczeniu macierzy znormalziowanej wg ponizszego wzoru
+The TOPSIS method is analogous to the Hellwig method, with the difference that objects are compared not only to the "ideal object" but also to the "anti-ideal".
+
+After converting variables into stimulants and determining the normalized matrix according to the formula below:
 
 $$
 z_{ij} = \frac{x_{ij}}{\sqrt{\sum_{i=1}^{m}{x_{ij}^2}}}
 $$
 
-```{r include=FALSE}
+```{r echo=FALSE}
 normalized_matrix <- data_stym
 x <- c()
 
@@ -389,9 +396,7 @@ for(i in 1:nrow(data_stym)){
 }
 ```
 
-
-przechodzimy do wyznaczenia wzorca i antywzorca:
-
+we can find an ideal and anti-ideal objects:
 
 ```{r echo=FALSE}
 p_ideal <- c(max(normalized_matrix$travel_time_to_work),
@@ -407,9 +412,9 @@ n_ideal <- c(min(normalized_matrix$travel_time_to_work),
 n_ideal
 ```
 
-Nastepnie obliczamy odleglosci poszczegolnych obiektow od wzorca i antywzorca. 
+As the next step, we calculate distances from the best and the worst object.
 
-```{r include=FALSE}
+```{r echo=FALSE}
 for (i in 1:5){
   normalized_matrix[,6+i] <- (normalized_matrix[,1+i] - p_ideal[i])^2
 }
@@ -419,16 +424,16 @@ for (i in 1:5){
 }
 
 for (i in 1:nrow(data_stym)){
-  normalized_matrix[i,17] <- sqrt(sum(normalized_matrix[i,7:11])) # odleglosci od wzorca
+  normalized_matrix[i,17] <- sqrt(sum(normalized_matrix[i,7:11])) # distance from ideal
 }
 
 for (i in 1:nrow(data_stym)){
-  normalized_matrix[i,18] <- sqrt(sum(normalized_matrix[i,12:16])) # odleglosci od antywzorca
+  normalized_matrix[i,18] <- sqrt(sum(normalized_matrix[i,12:16])) # distance from anti-ideal
 }
 
 ```
 
-Na tej podstawie wyznaczamy wspolczynnik rankingowy okreslajacy jak dany obiekt jest podobny do rozwiazania idealnego. Podobnie jak wczesniej, stany zostaly przyporzadkowane do 4 grup na podstawie uzyskanych punktow rankingowych.
+Based on this, we determine the ranking coefficient indicating how similar a given object is to the ideal solution. Similar to before, states have been assigned to 4 groups based on the obtained ranking points.
 
 ```{r echo=FALSE}
 for (i in 1:nrow(data_stym)){
@@ -443,7 +448,7 @@ topsis_final$topsis_rank <- c(1:51)
 avg_topsis_score <- mean(topsis_final$topsis_score)
 sd_topsis_score <- sd(topsis_final$topsis_score)
 
-# Interpretacja wynikow na podstawie sredniej wartosci wspolczynnika rankingowego
+# Interpretation
 
 for(i in 1:nrow(topsis_final)){
   if(topsis_final[i,2] >= avg_topsis_score + sd_topsis_score){
@@ -473,7 +478,7 @@ ordering_final<- merge(hellwig_final,topsis_final, by="state")
   ordering_final[order(ordering_final$hellwig_score, decreasing=TRUE),][1:10,]
 ```
 
-```{r include=FALSE}
+```{r echo=FALSE}
 same_rank <- 0
 same_group <- 0
 
@@ -491,11 +496,11 @@ same_group
 ```
 
 
-Jedynie 2 z 51 stanow znalazlo sie na tych samych miejscach w przypadku porzadkowania obiema metodami. Mozna zaobserwowac jednak, ze obiekty "lepsze" w obu przypadkach plasuja sie wysoko, natomiast stany z gorszym stanem infrastruktury transportowej zawsze plasuja nisko. Obiekty posrednie takze czesto przyjmuja podobne miejsca w obu rankingach. Potwierdza to fakt, ze 35 stanow trafilo do tej samej grupy w przypadku obu metod.
+Only 2 out of 51 states found themselves in the same positions when ranked by both methods. However, it can be observed that "better" objects in both cases are consistently ranked high, while states with worse transportation infrastructure always rank low. Intermediate objects also often assume similar positions in both rankings. This confirms that 35 states fell into the same group in both methods.
 
-Wspolczynnik korelacji liniowej Pearsona miedzy wartosciami zmiennych rankingowych (Hellwig score i TOPSIS score) wynosi 0,85. Wspolczynnik korelacji rang Spearmana miedzy pozycjami w rankingu (Hellwig rank i TOPSIS rank) wyniosl 0,8.
+The Pearson linear correlation coefficient between the values of ranking variables (Hellwig score and TOPSIS score) is 0.85. The Spearman rank correlation coefficient between positions in the ranking (Hellwig rank and TOPSIS rank) is 0.8.
 
-W zaleznosci od uzytej metody porzadkowania liniowego otrzymujemy inny ranking stanow pod wzgledem infrastruktury transportowej. Roznice wynikaja z odmiennosci algorytmow. Mimo ze obie metody sa wzorcowe i wykorzystuja odleglosc euklidesowa, w metodzie TOPSIS obiekty dodatkowo poronujemy do antywzorca. Inna jest rowniez metoda normalizacji oraz sposob wyznaczania zmiennych rankingowych (interpretacja na podstawie  [artykulu](https://dbc.wroc.pl/Content/33121/PDF/Bak_Porzadkowanie_Liniowe_Obiektow_Metoda_Hellwiga_i_Topsis_2016.pdf)).
+Depending on the linear ordering method used, we obtain a different ranking of states in terms of transportation infrastructure. Differences arise from algorithmic variations. Although both methods are benchmark and use Euclidean distance, in the TOPSIS method, objects are additionally compared to the anti-ideal. The normalization method and the way of determining ranking variables are also different.
   
 
 
@@ -503,8 +508,368 @@ W zaleznosci od uzytej metody porzadkowania liniowego otrzymujemy inny ranking s
 
 
 
-## Analiza skupien
+## Cluster analysis
+
+Cluster analysis is an unsupervised classification method, meaning that with only certain X variables, we aim to discover dependencies between them without utilizing a Y variable. The goal of the method is to divide objects in such a way that elements within the same group are as similar as possible, while the constructed groups differ as much as possible from each other. Classification algorithms are divided into two main types: divisive clustering and hierarchical clustering.
+
+The starting point for cluster analysis is the standardization of variables because we want each variable to have a similar, unit-independent impact on the analysis result. Standardization ensures the comparability of variables, as they are expressed on the same scale.
+
+In classification methods, similarity or distance measures between objects are used in the formation of clusters. Our clustering algorithms will be based on distance functions. The matrix below shows the distance (Euclidean) between individual states in the context of transportation infrastructure. In the plot, the red color indicates significant differences between individual states, while the blue color means that two objects are similar.
+
+
+```{r echo=FALSE}
+# standarisation
+
+data_standarized <- data.frame(data)
+rownames(data_standarized) <- data_standarized[,1]
+data_standarized[,1] <- NULL
+
+data_standarized <- as.data.frame(scale(data_standarized))
+
+
+# distance matrix
+
+distance <- get_dist(data_standarized)
+fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))
+```
 
 
 
 
+
+### Divisive clustering
+
+In divisive clustering, objects are divided into k disjoint clusters, where k is predefined. However, there are methods that assist in selecting the appropriate number of clusters. The most popular divisive clustering algorithm is the k-means method.
+
+
+
+#### K-means clustering
+
+In the k-means method, each cluster is represented by a centroid, which is a vector of mean values along the coordinates. Because objects in the initial clusters are randomly selected, the algorithm produces different final results depending on the starting point (it seeks a local minimum, not a global one). This issue can be partially addressed by conducting the procedure multiple times and then selecting the solution in which objects within groups differ the least. The algorithm is sensitive to outliers, so we expect some issues with Rhode Island, which stood out significantly from other states in terms of road and bridge conditions and had one of the lowest fatality rates in accidents.
+
+As a result of the initial k-means clustering, two groups were obtained with descriptive statistics shown in the tables below. The first group, consisting of 16 states, is characterized by a longer average commute time and time spent in traffic compared to the second group (35 objects). At the same time, it has a much lower fatality rate in traffic accidents than the second group.
+
+```{r echo=FALSE}
+# division into 2 groups
+
+k2 = kmeans(data_standarized, centers=2, nstart = 20)
+
+clustering_results <- data.frame(data)  
+rownames(clustering_results) <- clustering_results[,1]
+clustering_results[,1] <- NULL
+
+# statistics in groups
+
+clustering_results$k2 <- as.factor(k2$cluster)
+describeBy(clustering_results[,-6], group = clustering_results$k2)
+```
+
+```{r echo=FALSE}
+fviz_cluster(k2, data = data_standarized) + theme_minimal()
+```
+
+
+Below are the results of k-means clustering for 2 groups after removing Rhode Island from the dataset. We can see that a few objects have been assigned to a different group than before, but overall, the division has not changed significantly. Also, descriptive statistics in individual groups have changed only slightly. One of the groups (left) still has a longer average commute time, time spent in traffic, and a lower fatality rate in traffic accidents.
+
+
+```{r echo=FALSE}
+# outliers removal
+data_standarized_2 <- data_standarized[!(row.names(data_standarized) == "Rhode Island"), ]
+
+# division into 2 groups
+k2 = kmeans(data_standarized_2, centers=2, nstart = 20)
+
+clustering_results <- data.frame(data[data$state != "Rhode Island", ])  
+rownames(clustering_results) <- clustering_results[,1]
+clustering_results[,1] <- NULL
+
+# statistics in groups
+
+fviz_cluster(k2, data = data_standarized_2) + theme_minimal()
+```
+
+```{r echo=FALSE}
+clustering_results$k2 <- as.factor(k2$cluster)
+describeBy(clustering_results[,-6], group = clustering_results$k2)
+```
+
+The chart below shows how objects differ into two groups, considering only the fatality rate and the congestion level in each state. We can see that both variables had a crucial impact on the classification of objects into groups.
+
+
+```{r echo=FALSE}
+ggplot(clustering_results, aes(x=hours_in_congestion, y=fatalities)) +
+  geom_text(aes(label=rownames(clustering_results), color=k2)) + 
+  theme_minimal() + theme(legend.position = "None") + 
+  labs(x="Annual time spent in congestion (in hours)", 
+       y="Fatal car accidents per 100 million vehicle miles traveled")
+```
+
+The results of dividing states into 3 groups using the k-means method are presented in the tables below and on the chart.
+
+```{r echo=FALSE}
+k3 = kmeans(data_standarized_2, centers=3, nstart = 20)
+
+clustering_results$k3 <- as.factor(k3$cluster)
+describeBy(clustering_results[,-c(6,7)], group = clustering_results$k3)
+```
+
+
+As a result of dividing objects into 3 clusters, a blue group emerged with a very short commute time, low congestion, a relatively high fatality rate, and good road conditions. The next group - red - is characterized by average values of all four variables. Residents of states classified into the green group spend the most time in traffic jams and commuting to work. At the same time, this group has the lowest average fatality rate in accidents.
+
+```{r echo=FALSE}
+fviz_cluster(k3, data = data_standarized_2) + theme_minimal()
+```
+
+THe feature of divisive clustering methods is that the optimal number of clusters is not known in advance. As the value of k increases, the distances between objects within the same clusters practically keep decreasing because they are closer to a different centroid, even if the partition is clearly incorrect. So, how do we find the optimal value of k in the k-means method? One possible way is the elbow method, which involves selecting the number of clusters for which the Within-cluster Sum of Squares (WSS) shows the largest "jump." WSS is the sum of distances between objects and the centroid within each cluster. You should choose a number of clusters such that adding another one does not significantly improve the overall WSS.
+
+
+```{r echo=FALSE}
+set.seed(0)
+
+kmeans_wss <- map_dbl(2:10, function(i) {
+  m <- kmeans(data_standarized, centers = i)
+  m$tot.withinss
+})
+
+ggplot(data.frame(cluster = 2:10, within.ss = kmeans_wss), aes(cluster, within.ss)) +
+  geom_point() + geom_line() + scale_x_continuous(breaks = 1:10) + 
+  theme_minimal() + labs(x="Number of clusters", y="The within-sum-of-squares ( withinss )")
+```
+
+
+On the above chart, we see a curve of WSS values depending on the number of clusters. The potential optimal number of clusters should be identified at the point of the most significant decrease in the curve. In the case of the analyzed data, it is challenging to explicitly determine the best value for k because there are no heavy drops in the curve. However, it is noticeable that for k=4, the curve decreases at a slightly higher angle than for the other k values. Therefore, k=4 can be accepted as the optimal number of clusters.
+
+The division of states concerning transportation infrastructure into 4 groups is presented in the chart below. One of the groups, representing states such as Nebraska or Arkansas, is characterized by a short commute time to work and low congestion, with a high fatality rate in accidents. The second group includes states with higher values for the first two variables and a road condition rate of around 70%. The third group has slightly longer commute times and excellent road and bridge conditions. The fourth group consists of states with very long commute times and low fatality rates in accidents. Thus, with the division into 4 clusters, values of every variable have already been taken into account.
+
+```{r echo=FALSE}
+k4 = kmeans(data_standarized_2, centers=4, nstart = 20)
+
+clustering_results$k4 <- as.factor(k4$cluster)
+
+fviz_cluster(k4, data = data_standarized_2) + theme_minimal()
+```
+
+On the chart below, the differentiation of states into groups is presented once again, taking into account the average time residents of a given state spend annually in traffic jams and the fatality rate in road accidents. However, this time, the division is made with respect to 4 clusters. We can observe that considering only these two variables, the boundary between groups is not as distinct as it was for k=2. The influence of other features on classification has become more apparent.
+
+```{r echo=FALSE}
+ggplot(clustering_results, aes(x=hours_in_congestion, y=fatalities)) +
+  geom_text(aes(label=rownames(clustering_results), color=k4)) + 
+  theme_minimal() + theme(legend.position = "None") + 
+  labs(x="Annual time spent in congestion (in hours)", 
+       y="Fatal car accidents per 100 million vehicle miles traveled")
+```
+
+
+
+
+
+### Hierarchical clustering
+
+In case of hierarchical clustering, individual objects are grouped together in such a way that they are divided by the smallest possible distances. These algorithms do not require the prior specification of the number of groups. The optimal number of groups can be determined later, for example, after analyzing the dendrogram.
+
+Before applying the algorithm, it is necessary to normalize variables to ensure that distances between objects are not distorted if individual dimensions are expressed in different units.
+
+
+
+#### Ward metohd
+
+To begin with, we will perform object clustering using the Ward's method. The chart below shows 4 dendrograms depending on the distance measure used. Ultimately, the Euclidean distance will be used for calculations, as it is the most commonly used distance in machine learning algorithms. In this study, once again, the decision was made not to include the state of Rhode Island.
+
+```{r echo=FALSE}
+# distances
+
+dist_eucl <- dist(data_standarized_2, "euclidean")
+dist_manh <- dist(data_standarized_2, "manhattan")
+dist_mink <- dist(data_standarized_2, "minkowski", p=3)
+dist_maxi <- dist(data_standarized_2, "maximum")
+
+ward_eucl <- hclust(dist_eucl, "ward.D")
+ward_manh <- hclust(dist_manh, "ward.D")
+ward_mink <- hclust(dist_mink, "ward.D")
+ward_maxi <- hclust(dist_maxi, "ward.D")
+
+# dendogram
+
+d1 <- ggdendrogram(ward_eucl, theme_dendro = TRUE) + 
+  ggtitle("Euclidean distance, Ward method") + 
+  labs(x="", y="")
+d2 <- ggdendrogram(ward_manh, theme_dendro = TRUE) + 
+  ggtitle("Manhattan distance, Ward method") + 
+  labs(x="", y="")
+d3 <- ggdendrogram(ward_mink, theme_dendro = TRUE) + 
+  ggtitle("Minkowski distance,Ward method") + 
+  labs(x="", y="")
+d4 <- ggdendrogram(ward_maxi, theme_dendro = TRUE) + 
+  ggtitle("Maximum distance, Ward method") + 
+  labs(x="", y="")
+
+grid.arrange(d1, d2, d3, d4, ncol=2)
+```
+
+When using hierarchical clustering method, it is essential to identify the point at which further clustering should be stopped. It is advisable to choose the number of clusters for which the difference between this number and the next level on the dendrogram is sufficiently large. On the chart below, the dashed line intersects the dendrogram, classifying objects into 4 groups.
+
+```{r echo=FALSE}
+dend_ward_eucl <- color_branches(ward_eucl, k=4)
+
+plot(dend_ward_eucl, main="Euclidean distance, Ward method, 4 custers")
+
+
+dend_ward_eucl %>% set("branches_lwd", 2) %>% 
+  plot(main="Euclidean distance, Ward method, 4 custers")
+abline(h=9, lty=5)
+```
+
+In the above dendrogram, it is evident that the clusters formed in the clustering process are clearly separated from each other. The branches of the resulting tree at the chosen intersection point lead to the formation of clusters with a meaningful selection of objects that share common characteristics. The discontinuity in the linkage distance chart below, concerning the stages of linkage, suggests that 4 clusters (but also 2 or 3) are the optimal numbers for our data.
+
+```{r echo=FALSE}
+plot(x=1:49, y=ward_eucl$height, type = "S", 
+     xlab = "Step", ylab = "Distance", main="Linkage distance vs linkage step")
+```
+
+The selection of the number of clusters can also be made by analyzing specific indices. Examples of these include the G1 index by Calinski and Harabasz, the G2 index by Baker and Hubert, the G3 index by Hubert and Levine, and the Silhouette index. The chart below presents the index values depending on the number of clusters. The criterion for choosing, in the case of G1, G2, and Silhouette indices, is to maximize the values. For the G3 index, we seek the smallest value. It is evident that each index points to a different optimal number of clusters. The final choice of the number of clusters, therefore, remains a subjective decision.
+
+```{r echo=FALSE}
+indexes <- data.frame(G1=0, G2=0, G3=0, S=0)
+
+for(i in 2:10){
+  cluster <- cutree(ward_eucl, k=i)
+  g1 <- index.G1(data_standarized, cluster)
+  g2 <- index.G2(dist_eucl, cluster)
+  g3 <- index.G3(dist_eucl, cluster)
+  s <- index.S(dist_eucl, cluster)
+  indexes[i,] <- c(g1, g2, g3, s)
+}
+
+indexes <- indexes[-1,]
+indexes$k <- 2:10
+indexes
+
+#G1  
+p_1 <- ggplot(data=indexes, aes(x=k, y=G1)) + geom_line() + geom_point() + labs(x="k", y="Index G1 - max")
+
+#G2
+p_2 <- ggplot(data=indexes, aes(x=k, y=G2)) + geom_line() + geom_point() + labs(x="k", y="Index G2 - max")
+
+#G3
+p_3 <- ggplot(data=indexes, aes(x=k, y=G3)) + geom_line() + geom_point() + labs(x="k", y="Index G3 - min")
+
+#S
+p_4 <- ggplot(data=indexes, aes(x=k, y=S)) + geom_line() + geom_point() + labs(x="k", y="Index S - max")
+
+
+grid.arrange(p_1, p_2, p_3, p_4, ncol=2)
+```
+
+
+
+
+
+## Multidimensional scaling
+
+
+The aim of multidimensional scaling is to represent objects expressed through n variables in an m-dimensional space, where m is smaller than n. Multidimensional scaling seeks to arrange objects in such a way that despite the reduction in dimensions, similar objects remain close to each other. If m is less than or equal to 3, the results of scaling can be represented on a graph.
+
+### Classical multidimensional scaling
+
+By applying the algorithm of classical multidimensional scaling, the goal is to reduce dimensions in a way that minimizes distortions in the true distances between objects. As a result of scaling our data into a two-dimensional space, the following outcome is obtained. The state of Rhode Island has not been included in the dataset.
+
+
+```{r echo=FALSE}
+obj_dist <- dist(data_standarized_2)
+
+obj_dist <- dist(data_standarized_2)
+sww2 <- cmdscale(obj_dist, k = 2)
+
+autoplot(cmdscale(obj_dist, eig = TRUE), 
+         label = TRUE, label.size = 4) + 
+  labs(title= "", x="Dim 1", y="Dim 2") + theme_minimal()
+```
+
+On the chart, we can also observe certain relationships. States with high values on the first dimension, including New York, New Jersey, and Maryland, are characterized by long average commute times to work and longer time spent in traffic jams. The higher on the chart, the higher the fatality rates in road accidents (e.g., West Virginia 1.51, South Carolina 1.83). In the upper right corner, there are states with poor road conditions (New Jersey, Hawaii, California), while in the lower left corner, there are states whose residents spend relatively less time in traffic jams and commuting to work (North Dakota, Wyoming).
+
+Comparing the results of multidimensional scaling with cluster analysis, we can see that similar objects, which are close to each other after scaling into two dimensions, have also been classified into the same groups in the cluster analysis.
+
+```{r echo=FALSE}
+autoplot(cmdscale(obj_dist, eig = TRUE), label = TRUE, label.size = 4, colour=clustering_results$k4) + 
+  labs(title= "", x="Dim 1", y="Dim 2") + theme_minimal()
+```
+
+The quality of mapping real data onto a space with fewer dimensions is measured by the STRESS coefficient. The lower the STRESS value, the better the fit of the reconstructed distance matrix to the actual distance matrix. In our case, the very high STRESS coefficient of 6.82 indicates a very poor fit of the distance matrices. We can improve the quality of the fit by increasing the dimensionality of the space onto which we project our data.
+
+```{r echo=FALSE}
+obj_dist2 <- dist(sww2)
+stress2 <- sqrt((sum(obj_dist-obj_dist2)^2)/sum(obj_dist^2))
+stress2
+```
+
+
+```{r fig.height=8, fig.width=8, echo=FALSE}
+# Rzutowanie na 3 wymiary
+sww3 <- cmdscale(obj_dist, k = 3)
+
+s3d  <- scatterplot3d(sww3, xlab="Dim 1", ylab="Dim 2", zlab="Dim 3",
+                      pch = 16, color=clustering_results$k4)
+text(s3d$xyz.convert(sww3), labels = rownames(clustering_results), cex = 0.8)
+```
+
+As a result of increasing the dimensionality of the projection space, the STRESS coefficient has decreased, but it still assumes a very high value, indicating a poor fit of the distance matrices.
+
+```{r echo=FALSE}
+obj_dist3 <- dist(sww3)
+stress3 <- sqrt((sum(obj_dist-obj_dist3)^2)/sum(obj_dist^2))
+stress3
+```
+
+### Sammon projection
+
+
+
+The Sammon's method, similarly to classical multidimensional scaling, reduces the number of dimensions in the data in such a way that the distances between objects in the new coordinate system are similar to the original distances between objects. However, its advantage over the classical method is that, thanks to a suitable choice of weights, it better represents small distances.
+
+```{r echo=FALSE}
+sammon2 <- sammon(obj_dist, k = 2)
+sammon2$points
+
+autoplot(sammon(obj_dist, k = 2), label = TRUE, label.size = 4) + 
+  labs(title= "", x="Dim 1", y="Dim 2") + theme_minimal()
+```
+
+```{r echo=FALSE}
+sammon2$stress
+```
+
+
+We can see that as a result of scaling with the Sammon's method, the objects are positioned in a two-dimensional space similarly to classical scaling. However, there are slight differences visible. Similar objects are still close to each other, confirming the comparison of scaling with the result of the earlier cluster analysis (chart below). However, the STRESS coefficient has significantly decreased, now standing at only 3.9%, indicating a very good fit between the distance matrices of the fitted and observed objects.
+
+
+```{r echo=FALSE}
+autoplot(sammon(obj_dist, k = 2), label = TRUE, label.size = 4, colour=clustering_results$k4) + 
+  labs(title= "", x="Dim 1", y="Dim 2") + theme_minimal()
+```
+
+By increasing the number of projection dimensions by one, we obtain a STRESS coefficient of 0.7%, which indicates an exceptionally good fit between the reconstructed and observed distance matrices.
+
+```{r fig.height=8, fig.width=8, echo=FALSE}
+sammon3 <- sammon(obj_dist, k = 3)
+sammon3$points
+
+s3d  <- scatterplot3d(sammon3$points, xlab="Dim 1", ylab="Dim 2", zlab="Dim 3",
+                      pch = 16, color=clustering_results$k4)
+text(s3d$xyz.convert(sammon3$points), labels = rownames(clustering_results), cex = 0.8)
+```
+
+```{r echo=FALSE}
+sammon3$stress
+```
+
+
+
+
+
+## Summary
+
+In this project, an attempt was made to build a ranking of U.S. states based on transportation infrastructure data, including road and bridge conditions, fatality rates in accidents, congestion levels, and average commuting time. After analyzing the results, it can be concluded that high-quality rankings were achieved. They sensibly reflect which states have better or worse transportation infrastructure compared to others. Despite some differences in the order depending on the linear ranking method used, we managed to identify which states boast the best transportation infrastructure and which ones should take appropriate steps to improve it. The validity of the ranking is confirmed by the fact that 6 out of the top 10 positions also appear in the Transportation Rankings published by U.S. News.
+
+Cluster analysis also yielded good results. The classification successfully divided states into 4 groups that clearly differ in terms of the considered variables. At the same time, objects within each group are very similar. The division into 4 groups was considered optimal, guided by intuition, making it a subjective choice. Dividing states into 2 or 3 groups could also result in well-interpretable outcomes.
+
+Multidimensional scaling successfully presented the data in two- and three-dimensional spaces. Particularly good representation was achieved using the Sammon's method. By visualizing the data on a chart, we could better observe which states are similar to each other in terms of transportation infrastructure and which ones differ significantly.
